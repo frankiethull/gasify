@@ -1,0 +1,19 @@
+Package: gasify
+Title: Gasify Gets Chart Data from GasBuddy.com
+Version: 0.0.0.9000
+Authors@R: 
+    person("F", "Hull", , "frankiethull@gmail.com", role = c("aut", "cre"))
+Description: This is an experimental poc project. The purpose is to show how to scrape web images, wrangle pixels, and convert imagery to tabular data.
+License: `use_mit_license()`
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.1
+Depends: 
+    R (>= 2.10)
+LazyData: true
+Imports: 
+    dplyr,
+    lubridate,
+    magick,
+    scales,
+    tidyr
