@@ -1,0 +1,51 @@
+---
+title: "README"
+author: "fth"
+format: gfm
+---
+
+## gasify
+
+gasify is an experimental pkg, PoC for image processing. The tool itself retrieves PNG images from a 3rd party website, these images are time series charts of daily gas prices. The main gasify function gasify::get_gas() converts the images into pixels, and scales based on axes, converting PNGs into tabular pricing data.  
+
+## An Example
+
+```{r}
+devtools::install_github('frankiethull/gasify')
+
+library(gasify)
+library(ggplot2)
+library(ggdark)
+library(dplyr)
+```
+
+#### areas
+
+```{r}
+# a dataframe of the URL area names and IDs
+gasify::area_options |> head()
+
+```
+
+#### periods (months)
+
+```{r}
+# a vector of the period options
+gasify::period_options
+```
+
+#### get data & visualize
+
+```{r}
+df <- gasify::get_gas()
+
+df |>
+  ggplot() + 
+  geom_line(aes(x = date, y = price), color = "darkcyan") + 
+  dark_mode() + 
+  labs(
+    title = "18 months of Chicago gas prices"
+  )
+
+```
+
