@@ -4,7 +4,7 @@
 \alias{get_gas}
 \title{scapes gasbuddy image pixels and converts to df}
 \usage{
-get_gas(period = 18, country = "USA", area = "USA")
+get_gas(period = 18, country = "USA", area = "FortCollins")
 }
 \arguments{
 \item{period}{a month number, refer to period_options}
