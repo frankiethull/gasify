@@ -97,14 +97,22 @@ y_max <- max(y_axis_vector$y, na.rm = TRUE)
 x_max <- Sys.Date()
 x_min <- (x_max - lubridate::dmonths(period)) %>% as.Date()
 
+# x-axis scaling
+n <- nrow(path_vector)
+stepper <- (x_max - x_min)/n
+dates <- seq.Date(from = x_min, to = x_max, by = stepper)
+
+
 # rescale path vector with scalars - - - - - - - - - - - - -
 path_vector %>%
   dplyr::ungroup() %>%
   dplyr::mutate(
-    day = dplyr::row_number(),
-    date = x_min + lubridate::days(day),
+    date = dates %>% tail(-1),
     price = scales::rescale(y, to = c(y_min, y_max))
-  ) -> tidy_gasbuddy_df
+  ) %>%
+  group_by(date) %>%
+  summarize(price = mean(price, na.rm = TRUE)) -> tidy_gasbuddy_df
+
 
     return(tidy_gasbuddy_df)
 }
